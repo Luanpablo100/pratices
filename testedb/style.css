@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+body {
+    background-color: rgba(240, 248, 255, 0.555);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+h1 {
+    font-family: Arial, sans-serif;
+}
+
+input {
+    background-color: rgba(4, 0, 255, 0.267);
+    border-radius: 6px;
+    height: 25px;
+    font-size: 12pt;
+}
