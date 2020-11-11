@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicação Electron</title>
+</head>
+<body>
+    <h1>Escolha um arquivo</h1>
+    <form action="">
+        <div>
+            <input type="file" accept="image/*"/>
+        </div>
+        <button type="submit">Mostrar dimensões</button>
+    </form>
+
+    <h1 id="result"> </h1>
+
+    <script>
+        const electron = require('electron')
+        const {ipcRenderer} = electron
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            //Inibir o comportamento padrão de envio de formulário
+            event.preventDefault()
+
+            //Selecionando o primeiro arquivo selecionado pelo usuário
+            const { path } = document.querySelector('input').files[0]
+            ipcRenderer.send('obterDimensoesDaImagem', path) //Enviando informações para o index.js
+
+            ipcRenderer.on('obterDimensoesDaImagem', (event, dimensions) => {
+                document.querySelector('#result').innerHTML = `Largura: ${dimensions.width} e Altura: ${dimensions.height}`
+            })
+        })
+    </script>
+</body>
+</html>
